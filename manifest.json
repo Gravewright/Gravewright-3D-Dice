@@ -1,7 +1,7 @@
 {
   "id": "gravewright-3d-dice",
   "name": "Gravewright 3D Dice",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "sdk": {"requires": ">=1.0.0 <2.0.0", "tested": "1.0.0"},
   "entry": "main.js",
   "description": "Physical 3D dice for Gravewright rolls, with private-roll visibility and personal dice colors, text colors and fonts.",

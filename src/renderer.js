@@ -32,7 +32,7 @@ function dieMesh(die,landing,prefs) {
    const c=map.image.getContext('2d');c.fillStyle=prefs.diceColor;c.fillRect(0,0,256,256);c.fillStyle=prefs.textColor;c.font=`600 44px "gw3d-${prefs.font}"`;
    face.forEach((vertex,i)=>{const opposite=data.faces.findIndex(f=>!f.includes(vertex));const [x,y]=projected[i];c.fillText(String(labels[opposite]),128+x/(extent*2.5)*256*.60,128-y/(extent*2.5)*256*.60);});map.needsUpdate=true;
   }
-  const material=new T.MeshStandardMaterial({map,roughness:.42,metalness:.12,transparent:die.discarded,opacity:die.discarded?.48:1});
+  const material=new T.MeshStandardMaterial({map,roughness:.42,metalness:.12,transparent:!!die.discarded,opacity:die.discarded?.48:1});
   materials.push(material);
  });
  geometry.setAttribute('position',new T.Float32BufferAttribute(positions,3));geometry.setAttribute('uv',new T.Float32BufferAttribute(uvs,2));geometry.computeVertexNormals();
@@ -44,7 +44,7 @@ export class DiceRenderer {
  constructor(container,{height=15}={}) {
   this.baseHeight=height;
   this.container=container;this.renderer=new T.WebGLRenderer({alpha:true,antialias:true});
-  this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.setClearColor(0,0);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFSoftShadowMap;
+  this.renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));this.renderer.setClearColor(0,0);this.renderer.shadowMap.enabled=true;this.renderer.shadowMap.type=T.PCFShadowMap;
   this.renderer.domElement.setAttribute('aria-hidden','true');container.append(this.renderer.domElement);
   this.scene=new T.Scene();this.camera=new T.OrthographicCamera(-12,12,8,-8,.1,100);this.camera.position.set(0,35,12);this.camera.lookAt(0,0,0);
   this.scene.add(new T.HemisphereLight(0xffffff,0x333844,3));

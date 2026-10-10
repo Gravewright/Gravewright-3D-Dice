@@ -5,7 +5,7 @@ ROOT=Path(os.environ.get('GRAVEWRIGHT_ROOT',Path(__file__).resolve().parents[2]/
 sys.path.insert(0,str(ROOT/'tests/e2e'))
 from migration_closure import main
 from playwright.sync_api import expect
-ARCHIVE=Path(__file__).resolve().parents[1]/'dist/gravewright-3d-dice-0.1.0.zip'
+ARCHIVE=Path(__file__).resolve().parents[1]/'dist/gravewright-3d-dice-0.1.1.zip'
 SEED=r'''
 import base64,hashlib
 from pathlib import Path
@@ -15,7 +15,7 @@ key=Ed25519PrivateKey.generate()
 keys={'test':base64.b64encode(key.public_key().public_bytes_raw()).decode()}
 Path(os.environ['GRAVEWRIGHT_MARKETPLACE_KEYS_FILE']).write_text(json.dumps(keys))
 raw=Path(os.environ['DICE_TEST_ARCHIVE']).read_bytes()
-record={'id':'gravewright-3d-dice','version':'0.1.0','sdk':'>=1.0.0 <2.0.0','download':'https://example.test/dice.zip','sha256':hashlib.sha256(raw).hexdigest(),'keyId':'test'}
+record={'id':'gravewright-3d-dice','version':'0.1.1','sdk':'>=1.0.0 <2.0.0','download':'https://example.test/dice.zip','sha256':hashlib.sha256(raw).hexdigest(),'keyId':'test'}
 record['signature']=base64.b64encode(key.sign(canonical(record))).decode()
 ModulePackages(Path(settings.MEDIA_ROOT)/'modules',keys).install(record,raw)
 '''

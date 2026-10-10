@@ -1,4 +1,17 @@
-# Validation — 0.1.0
+# Validation — 0.1.1
+
+Validated on Windows with headless Chromium and Three.js 0.184.0:
+
+- `python tests/renderer.py`: passed real WebGL rendering with supported PCF
+  shadows, ordinary dice with omitted/false discard flags, translucent discarded
+  dice, and resource disposal. No Three.js console warnings or browser errors.
+- `node --test tests/physics.test.mjs`: all 3 tests passed.
+- `node scripts/build.mjs`: generated the release ZIP successfully.
+
+The installed signed 0.1.0 package is unchanged. Updating users requires signing
+and publishing 0.1.1 through the normal release/marketplace process.
+
+## Previous integration validation — 0.1.0
 
 Host integration: Gravewright main commit `ab3e7a6` (optional `customize(context)` lifecycle hook and table button). The core repository contains no 3D Dice source, physics libraries or font assets. Translator remains in its own repository.
 
