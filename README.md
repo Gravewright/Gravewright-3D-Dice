@@ -23,6 +23,11 @@ abre a prévia e permite alterar somente **cor do dado**, **cor do texto** e
 podem personalizar sua aparência; a ativação da mesa continua sendo controlada
 pelo GM. Desativar remove a camada 3D e mantém as rolagens nativas.
 
+A versão 0.1.1 está disponível nas [Releases do Marketplace](https://github.com/Gravewright/marketplace/releases/tag/gravewright-3d-dice-v0.1.1).
+Use **Atualizar** na lista de módulos para instalar a correção dos avisos do Three.js.
+**Remover** desinstala o módulo de todas as mesas afetadas após a confirmação;
+as preferências salvas são preservadas para uma futura reinstalação.
+
 Requer um host com o hook opcional `customize(context)` do runtime de módulos,
 incluído na main do Gravewright junto com esta integração. O pacote inicial
 Gravewright 0.1.1 ainda não contém esse botão; atualize o host para o commit da

@@ -8,8 +8,10 @@ Validated on Windows with headless Chromium and Three.js 0.184.0:
 - `node --test tests/physics.test.mjs`: all 3 tests passed.
 - `node scripts/build.mjs`: generated the release ZIP successfully.
 
-The installed signed 0.1.0 package is unchanged. Updating users requires signing
-and publishing 0.1.1 through the normal release/marketplace process.
+The signed 0.1.0 package is unchanged. Version 0.1.1 is published through the
+central Marketplace signing workflow. Its immutable archive and signed catalog
+record are available in the Marketplace release; the host's Update action
+installs it while preserving table activation and personal settings.
 
 ## Previous integration validation — 0.1.0
 
