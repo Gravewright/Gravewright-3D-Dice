@@ -23,8 +23,10 @@ abre a prévia e permite alterar somente **cor do dado**, **cor do texto** e
 podem personalizar sua aparência; a ativação da mesa continua sendo controlada
 pelo GM. Desativar remove a camada 3D e mantém as rolagens nativas.
 
-A versão 0.1.1 está disponível nas [Releases do Marketplace](https://github.com/Gravewright/marketplace/releases/tag/gravewright-3d-dice-v0.1.1).
-Use **Atualizar** na lista de módulos para instalar a correção dos avisos do Three.js.
+A versão 0.1.2 reúne traduções e personalização em uma modal nativa. Os pacotes
+assinados são distribuídos pelas [Releases do Marketplace](https://github.com/Gravewright/marketplace/releases/tag/gravewright-3d-dice-v0.1.2).
+Use **Atualizar** na lista de módulos para instalar as melhorias preservando
+a ativação das mesas e as preferências pessoais.
 **Remover** desinstala o módulo de todas as mesas afetadas após a confirmação;
 as preferências salvas são preservadas para uma futura reinstalação.
 
@@ -37,7 +39,7 @@ As cinco fontes abertas são Atkinson Hyperlegible, Noto Sans, Noto Serif,
 IBM Plex Mono e Montserrat. Os arquivos e as licenças acompanham o ZIP;
 não há carregamento de fontes por CDN durante o jogo.
 
-## Translations / Traduções — unreleased source
+## Translations / Traduções — 0.1.2
 
 The customization interface uses Gravewright's Translator API (`context.i18n`)
 and the module's own English, Brazilian Portuguese and Spanish catalogs in
@@ -59,8 +61,13 @@ pública de modais do host. Nomes de rolagens escritos pelos usuários, nomes da
 fontes e o aviso legal preservam o texto original. Catálogos e listeners são
 removidos ao desativar o módulo.
 
-These changes are not part of the published 0.1.1 archive. / Estas alterações
-ainda não fazem parte do arquivo 0.1.1 publicado.
+Version 0.1.2 includes these changes. Its source and package versions are aligned
+for release; the Marketplace signing workflow publishes the installable archive.
+The previously published 0.1.1 archive remains unchanged.
+
+A versão 0.1.2 inclui estas alterações. As versões do código-fonte e do pacote
+estão alinhadas para a release; o fluxo de assinatura do Marketplace publica o
+arquivo instalável. O arquivo 0.1.1 publicado anteriormente permanece inalterado.
 
 ## Build and source
 
@@ -88,7 +95,7 @@ Translator ZIP and a Chromium executable, run the isolated browser checks:
 ```sh
 /path/to/gravewright/.venv/bin/python tests/localization.py \
   --host-root /path/to/gravewright \
-  --package dist/gravewright-3d-dice-0.1.1.zip \
+  --package dist/gravewright-3d-dice-0.1.2.zip \
   --translator /path/to/translator.zip \
   --output /path/to/gravewright/data/runner/dice-localization-review \
   --browser-executable /path/to/chromium

@@ -1,9 +1,10 @@
 # Validation
 
-## Unreleased translation and modal changes
+## 0.1.2 translation and modal validation
 
-The source still declares version 0.1.1. These local changes are separate from
-the published signed 0.1.1 archive and have not been released. They use
+The source manifest, package metadata and dependency lockfile declare version
+0.1.2. Releases use the central Marketplace signing workflow. The previously
+published signed 0.1.1 archive remains unchanged. This version uses
 `context.i18n` and `context.api.ui.openModal`, both verified in Gravewright's
 released `v0.3.2` tag; no host patch is required.
 
@@ -33,8 +34,11 @@ real Django/ASGI host, the built module ZIP and a real Translator package:
 
 The runtime archive used for browser validation had SHA-256
 `f7849956264ca27898405b112d059e96b87f412b19ca5d0939b2a16e9f2d3fb0`.
-Documentation-only rebuilds may have a different archive checksum; this checksum
-identifies the tested runtime, not a published release asset.
+Version and documentation changes produce a different archive checksum; this
+checksum identifies the browser-tested runtime, not a published release asset.
+Release preparation compares all runtime files, including the generated main
+bundle and physics worker, with that tested archive. Only version metadata and
+documentation may differ. It also reruns all 5 Node.js tests before packaging.
 
 All browser fixtures, databases, media, test packages, caches and screenshots
 stayed under the host installation's `data/runner/`. Operator configuration,
