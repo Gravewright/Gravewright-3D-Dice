@@ -28,14 +28,39 @@ Use **Atualizar** na lista de módulos para instalar a correção dos avisos do 
 **Remover** desinstala o módulo de todas as mesas afetadas após a confirmação;
 as preferências salvas são preservadas para uma futura reinstalação.
 
-Requer um host com o hook opcional `customize(context)` do runtime de módulos,
-incluído na main do Gravewright junto com esta integração. O pacote inicial
-Gravewright 0.1.1 ainda não contém esse botão; atualize o host para o commit da
-integração `ab3e7a6`, registrado em VALIDATION.md. O módulo em si nunca é incluído no core.
+Requer um host com o hook opcional `customize(context)` do runtime de módulos.
+A integração atual usa `context.i18n` e `context.api.ui.openModal`, APIs públicas
+já presentes no Gravewright 0.3.2; ela não exige alterações no core. A integração
+inicial está registrada em VALIDATION.md. O módulo em si nunca é incluído no core.
 
 As cinco fontes abertas são Atkinson Hyperlegible, Noto Sans, Noto Serif,
 IBM Plex Mono e Montserrat. Os arquivos e as licenças acompanham o ZIP;
 não há carregamento de fontes por CDN durante o jogo.
+
+## Translations / Traduções — unreleased source
+
+The customization interface uses Gravewright's Translator API (`context.i18n`)
+and the module's own English, Brazilian Portuguese and Spanish catalogs in
+`src/messages.js`. It follows the user's selected interface language, falls back
+to English, and refreshes an open customization window when the language changes.
+Labels, action buttons, source/license links and preview/save notices use the
+same catalog, including the preview's accessible label. The customization window
+uses the host's public modal API. Authored roll labels, font names and the legal
+attribution keep their original wording. Catalogs and listeners are removed when
+the module stops.
+
+A interface de personalização usa a API do Translator do Gravewright
+(`context.i18n`), com catálogos próprios em inglês, português brasileiro e
+espanhol no arquivo `src/messages.js`. Ela acompanha o idioma escolhido pelo
+usuário, usa inglês como alternativa e atualiza a janela aberta quando o idioma
+muda. Rótulos, botões, links de código-fonte/licença, o nome acessível da prévia e
+avisos de prévia e gravação passam pelo mesmo catálogo. A janela usa a API
+pública de modais do host. Nomes de rolagens escritos pelos usuários, nomes das
+fontes e o aviso legal preservam o texto original. Catálogos e listeners são
+removidos ao desativar o módulo.
+
+These changes are not part of the published 0.1.1 archive. / Estas alterações
+ainda não fazem parte do arquivo 0.1.1 publicado.
 
 ## Build and source
 
@@ -46,6 +71,34 @@ npm ci
 npm test
 npm run build
 ```
+
+Set `GRAVEWRIGHT_ROOT` to a Gravewright source checkout before `npm test` to run
+the behavioral integration test against the actual host translation and modal
+APIs. The test also discovers an enclosing host checkout automatically; when
+neither is available, that integration test is skipped. For example:
+
+```sh
+GRAVEWRIGHT_ROOT=/path/to/gravewright npm test
+```
+
+In PowerShell, use `$env:GRAVEWRIGHT_ROOT = 'E:\gravewright-base'` followed by
+`npm test`. With the host virtualenv's Python, an already built module ZIP, a
+Translator ZIP and a Chromium executable, run the isolated browser checks:
+
+```sh
+/path/to/gravewright/.venv/bin/python tests/localization.py \
+  --host-root /path/to/gravewright \
+  --package dist/gravewright-3d-dice-0.1.1.zip \
+  --translator /path/to/translator.zip \
+  --output /path/to/gravewright/data/runner/dice-localization-review \
+  --browser-executable /path/to/chromium
+```
+
+On Windows, use the host's `.venv/Scripts/python.exe` and installed Edge or
+Chromium executable. The output must be a fresh empty directory under the host's
+`data/runner/`; fixture data, media, installed test packages, caches and screenshots
+stay there. The test does not reuse operator data or installed packages.
+See [VALIDATION.md](VALIDATION.md) for results and platform limits.
 
 The release ZIP has manifest.json and main.js at its root and includes source,
 build scripts, dependency lockfile and license notices. Generated distributions

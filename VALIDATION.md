@@ -1,4 +1,47 @@
-# Validation — 0.1.1
+# Validation
+
+## Unreleased translation and modal changes
+
+The source still declares version 0.1.1. These local changes are separate from
+the published signed 0.1.1 archive and have not been released. They use
+`context.i18n` and `context.api.ui.openModal`, both verified in Gravewright's
+released `v0.3.2` tag; no host patch is required.
+
+Validated on Windows with Node.js and headless Edge/Chromium, using an isolated
+real Django/ASGI host, the built module ZIP and a real Translator package:
+
+- `node --test tests/*.test.mjs`, with the host checkout available through
+  `GRAVEWRIGHT_ROOT`: all 5 tests passed, with no skips. This includes 2
+  localization tests using the actual host translation/modal APIs and the 3
+  existing physics tests. The module's 15 keys have matching English, Brazilian
+  Portuguese and Spanish catalogs.
+- `python tests/localization.py --host-root ... --package ... --translator ...
+  --output ... --browser-executable ...`: all 19 browser checks passed. English,
+  Brazilian Portuguese and Spanish customization labels, accessible preview
+  names, links and notices were checked at viewport widths of 1440, 768 and
+  320 pixels, with no horizontal overflow and interface text of at least 12px.
+- Native modal focus, Save, Cancel, Escape and preference persistence after
+  reload passed. Two tabs produced a real revision conflict; the translated
+  notice preserved the draft. Locale events updated the existing modal and its
+  conflict notice while preserving the focused input.
+- A simulated HTTP 503 save failure displayed a translated retry notice and
+  preserved the draft; retry remained available. A real authoritative `1d6`
+  roll kept its user's English label while the interface was Spanish.
+- Deactivation with customization open removed the modal, 3D layer and all five
+  module fonts. There were no page errors, unexpected failing HTTP responses or
+  native browser alerts. The isolated server was stopped after the test.
+
+The runtime archive used for browser validation had SHA-256
+`f7849956264ca27898405b112d059e96b87f412b19ca5d0939b2a16e9f2d3fb0`.
+Documentation-only rebuilds may have a different archive checksum; this checksum
+identifies the tested runtime, not a published release asset.
+
+All browser fixtures, databases, media, test packages, caches and screenshots
+stayed under the host installation's `data/runner/`. Operator configuration,
+campaigns, installed modules and language preferences were not used. This run
+does not establish native Linux/macOS or every GPU/browser compatibility.
+
+## Published 0.1.1 validation
 
 Validated on Windows with headless Chromium and Three.js 0.184.0:
 
